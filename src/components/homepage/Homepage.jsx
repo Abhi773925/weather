@@ -15,20 +15,17 @@ const Homepage = () => {
   const API_KEY = "d1845658f92b31c64bd94f06f7188c9c";
 
   useEffect(() => {
-    // Check if coordinates are in session storage
     const localCoordinates = sessionStorage.getItem("user-coordinates");
     if (localCoordinates) {
       const coordinates = JSON.parse(localCoordinates);
       fetchUserWeatherInfo(coordinates);
     }
     
-    // Get saved locations
     const storedLocations = sessionStorage.getItem("savedLocations");
     if (storedLocations) {
       setSavedLocations(JSON.parse(storedLocations));
     }
     
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
       setDarkMode(true);
@@ -36,7 +33,6 @@ const Homepage = () => {
     }
   }, []);
 
-  // Toggle theme function
   const toggleTheme = () => {
     setDarkMode(!darkMode);
     if (!darkMode) {
@@ -94,7 +90,6 @@ const Homepage = () => {
       const data = await response.json();
       setWeatherData(data);
       
-      // Fetch forecast data
       if (data.name) {
         fetchDailyForecast(data.name);
       }
@@ -126,7 +121,6 @@ const Homepage = () => {
       const data = await response.json();
       setWeatherData(data);
       
-      // Fetch forecast data
       fetchDailyForecast(searchInput);
     } catch (error) {
       console.error("Error fetching weather:", error);
@@ -172,8 +166,7 @@ const Homepage = () => {
     setMenuOpen(false);
   };
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-black text-white' : 'bg-gradient-to-b from-blue-50 to-white text-gray-800'} transition-colors duration-300`}>
-      {/* Navbar */}
+    <div className={`min-h-screen min-w-screen ${darkMode ? 'bg-black text-white' : 'bg-gradient-to-b from-blue-50 to-white text-gray-800'} transition-colors duration-300`}>
       <nav className={`${darkMode ? 'bg-black text-white' : 'bg-white text-gray-800'} shadow-lg fixed w-full z-10 transition-colors duration-300`}>
         <div className="container mx-auto px-4 py-2">
           <div className="flex justify-between items-center">
@@ -207,7 +200,6 @@ const Homepage = () => {
             </div>
           </div>
           
-          {/* Mobile menu */}
           {menuOpen && (
             <div className={`md:hidden ${darkMode ? 'bg-black' : 'bg-white'} pt-2 pb-4 transition-colors duration-300`}>
               <div className="flex flex-col space-y-4">
@@ -221,12 +213,10 @@ const Homepage = () => {
         </div>
       </nav>
       
-      {/* Main Content */}
       <div className="container mx-auto px-4 pt-24 pb-16">
         <div id="weather" className="min-h-screen">
           <h1 className={`text-4xl font-bold text-center ${darkMode ? 'text-blue-400' : 'text-blue-700'} mb-8`}>Weather Pro</h1>
           
-          {/* Tab selector */}
           <div className="flex justify-center mb-6">
             <div className={`flex ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} rounded-lg p-1 shadow-lg`}>
               <button 
@@ -248,9 +238,7 @@ const Homepage = () => {
             </div>
           </div>
           
-          {/* Content container */}
           <div className="max-w-3xl mx-auto">
-            {/* Location access container */}
             {activeTab === 'user' && !locationAccess && !loading && !weatherData && (
               <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} text-center flex flex-col items-center transition-colors duration-300`}>
                 <MapPin size={64} className={`${darkMode ? 'text-blue-400' : 'text-blue-500'} mb-4`} />
@@ -265,7 +253,6 @@ const Homepage = () => {
               </div>
             )}
             
-            {/* Search form */}
             {activeTab === 'search' && (
               <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-6 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} mb-8 transition-colors duration-300`}>
                 <form onSubmit={handleSearch} className="flex gap-2">
@@ -292,7 +279,6 @@ const Homepage = () => {
               </div>
             )}
             
-            {/* Loading */}
             {loading && (
               <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} text-center flex flex-col items-center transition-colors duration-300`}>
                 <div className={`animate-spin rounded-full h-16 w-16 border-t-4 ${darkMode ? 'border-blue-400' : 'border-blue-500'} border-opacity-50 mb-4`}></div>
@@ -300,7 +286,6 @@ const Homepage = () => {
               </div>
             )}
             
-            {/* Weather info */}
             {weatherData && !loading && (
               <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} transition-colors duration-300`}>
                 <div className="flex justify-between items-start">
@@ -328,7 +313,6 @@ const Homepage = () => {
                   </div>
                 </div>
                 
-                {/* Weather parameters */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                   <div className={`${darkMode ? 'bg-gray-700' : 'bg-blue-50'} p-4 rounded-lg ${darkMode ? 'shadow-md shadow-gray-900/50' : 'shadow-md shadow-blue-200/50'} flex items-center transition-colors duration-300 transform hover:scale-105`}>
                     <Wind className={`${darkMode ? 'text-blue-400' : 'text-blue-500'} mr-3`} size={36} />
@@ -359,7 +343,6 @@ const Homepage = () => {
           </div>
         </div>
         
-        {/* Forecast section */}
         <div id="forecast" className="pt-16 pb-8">
           <h2 className={`text-3xl font-bold text-center ${darkMode ? 'text-blue-400' : 'text-blue-700'} mb-8`}>7-Day Weather Forecast</h2>
           
@@ -405,7 +388,6 @@ const Homepage = () => {
           )}
         </div>
         
-        {/* Saved locations section */}
         <div id="saved" className="pt-16">
           <h2 className={`text-3xl font-bold text-center ${darkMode ? 'text-blue-400' : 'text-blue-700'} mb-8`}>Saved Locations</h2>
           
@@ -476,7 +458,6 @@ const Homepage = () => {
         </div>
       </div>
       
-      {/* Mobile navigation footer */}
       <div className={`md:hidden fixed bottom-0 left-0 right-0 ${darkMode ? 'bg-black' : 'bg-white'} shadow-lg transition-colors duration-300`}>
         <div className="flex justify-around items-center py-2">
           <button onClick={() => scrollToSection('weather')} className="flex flex-col items-center p-2">
