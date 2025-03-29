@@ -255,7 +255,7 @@ const Homepage = () => {
             
             {activeTab === 'search' && (
               <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-6 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} mb-8 transition-colors duration-300 w-full`}>
-                <form onSubmit={handleSearch} className="flex gap-2 w-full">
+                <form onSubmit={handleSearch} className="flex  flex-col gap-2 w-full">
                   <input
                     type="text"
                     placeholder="Search for city..."
