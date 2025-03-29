@@ -166,7 +166,7 @@ const Homepage = () => {
     setMenuOpen(false);
   };
   return (
-    <div className={`min-h-screen min-w-screen ${darkMode ? 'bg-black text-white' : 'bg-gradient-to-b from-blue-50 to-white text-gray-800'} transition-colors duration-300`}>
+    <div className={`min-h-screen w-full min-w-screen ${darkMode ? 'bg-black text-white' : 'bg-gradient-to-b from-blue-50 to-white text-gray-800'} transition-colors duration-300`}>
       <nav className={`${darkMode ? 'bg-black text-white' : 'bg-white text-gray-800'} shadow-lg fixed w-full z-10 transition-colors duration-300`}>
         <div className="container mx-auto px-4 py-2">
           <div className="flex justify-between items-center">
@@ -201,7 +201,7 @@ const Homepage = () => {
           </div>
           
           {menuOpen && (
-            <div className={`md:hidden ${darkMode ? 'bg-black' : 'bg-white'} pt-2 pb-4 transition-colors duration-300`}>
+            <div className={`md:hidden ${darkMode ? 'bg-black' : 'bg-white'} pt-2 pb-4 transition-colors duration-300 w-full`}>
               <div className="flex flex-col space-y-4">
                 <button onClick={() => scrollToSection('weather')} className={`${darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'} transition py-1`}>Home</button>
                 <button onClick={() => setActiveTab('search')} className={`${darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'} transition py-1`}>Search Weather</button>
@@ -213,14 +213,14 @@ const Homepage = () => {
         </div>
       </nav>
       
-      <div className="container mx-auto px-4 pt-24 pb-16">
-        <div id="weather" className="min-h-screen">
+      <div className="container mx-auto px-4 pt-24 pb-16 w-full">
+        <div id="weather" className="min-h-screen w-full">
           <h1 className={`text-4xl font-bold text-center ${darkMode ? 'text-blue-400' : 'text-blue-700'} mb-8`}>Weather Pro</h1>
           
-          <div className="flex justify-center mb-6">
-            <div className={`flex ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} rounded-lg p-1 shadow-lg`}>
+          <div className="flex justify-center mb-6 w-full">
+            <div className={`flex ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} rounded-lg p-1 shadow-lg w-full max-w-md`}>
               <button 
-                className={`px-6 py-2 rounded-md font-medium ${activeTab === 'user' 
+                className={`px-6 py-2 rounded-md font-medium w-1/2 ${activeTab === 'user' 
                   ? (darkMode ? 'bg-gray-700 shadow-md text-blue-400' : 'bg-white shadow-md text-blue-600') 
                   : (darkMode ? 'text-gray-300' : 'text-gray-600')}`}
                 onClick={() => switchTab('user')}
@@ -228,7 +228,7 @@ const Homepage = () => {
                 Your Weather
               </button>
               <button 
-                className={`px-6 py-2 rounded-md font-medium ${activeTab === 'search' 
+                className={`px-6 py-2 rounded-md font-medium w-1/2 ${activeTab === 'search' 
                   ? (darkMode ? 'bg-gray-700 shadow-md text-blue-400' : 'bg-white shadow-md text-blue-600') 
                   : (darkMode ? 'text-gray-300' : 'text-gray-600')}`}
                 onClick={() => switchTab('search')}
@@ -238,9 +238,9 @@ const Homepage = () => {
             </div>
           </div>
           
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto w-full">
             {activeTab === 'user' && !locationAccess && !loading && !weatherData && (
-              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} text-center flex flex-col items-center transition-colors duration-300`}>
+              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} text-center flex flex-col items-center transition-colors duration-300 w-full`}>
                 <MapPin size={64} className={`${darkMode ? 'text-blue-400' : 'text-blue-500'} mb-4`} />
                 <h2 className={`text-xl font-semibold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Grant Location Access</h2>
                 <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-6`}>Allow access to get your local weather information</p>
@@ -254,8 +254,8 @@ const Homepage = () => {
             )}
             
             {activeTab === 'search' && (
-              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-6 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} mb-8 transition-colors duration-300`}>
-                <form onSubmit={handleSearch} className="flex gap-2">
+              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-6 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} mb-8 transition-colors duration-300 w-full`}>
+                <form onSubmit={handleSearch} className="flex gap-2 w-full">
                   <input
                     type="text"
                     placeholder="Search for city..."
@@ -280,15 +280,15 @@ const Homepage = () => {
             )}
             
             {loading && (
-              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} text-center flex flex-col items-center transition-colors duration-300`}>
+              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} text-center flex flex-col items-center transition-colors duration-300 w-full`}>
                 <div className={`animate-spin rounded-full h-16 w-16 border-t-4 ${darkMode ? 'border-blue-400' : 'border-blue-500'} border-opacity-50 mb-4`}></div>
                 <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Loading weather data...</p>
               </div>
             )}
             
             {weatherData && !loading && (
-              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} transition-colors duration-300`}>
-                <div className="flex justify-between items-start">
+              <div className={`${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} transition-colors duration-300 w-full`}>
+                <div className="flex justify-between items-start w-full">
                   <div>
                     <div className="flex items-center mb-3">
                       <h2 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{weatherData.name}</h2>
@@ -309,11 +309,11 @@ const Homepage = () => {
                       alt={weatherData.weather[0].description}
                       className="w-20 h-20"
                     />
-                    <p className={`text-5xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{Math.round(weatherData.main.temp)}°C</p>
+                    <p className={`text-5xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{Math.round(weatherData.main.temp)}</p>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 w-full">
                   <div className={`${darkMode ? 'bg-gray-700' : 'bg-blue-50'} p-4 rounded-lg ${darkMode ? 'shadow-md shadow-gray-900/50' : 'shadow-md shadow-blue-200/50'} flex items-center transition-colors duration-300 transform hover:scale-105`}>
                     <Wind className={`${darkMode ? 'text-blue-400' : 'text-blue-500'} mr-3`} size={36} />
                     <div>
@@ -343,11 +343,11 @@ const Homepage = () => {
           </div>
         </div>
         
-        <div id="forecast" className="pt-16 pb-8">
+        <div id="forecast" className="pt-16 pb-8 w-full">
           <h2 className={`text-3xl font-bold text-center ${darkMode ? 'text-blue-400' : 'text-blue-700'} mb-8`}>7-Day Weather Forecast</h2>
           
           {forecastData ? (
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto w-full">
               <div className="flex space-x-4 pb-4 min-w-max">
                 {forecastData.list.slice(0, 8).map((forecast, index) => {
                   const date = new Date(forecast.dt * 1000);
@@ -384,24 +384,24 @@ const Homepage = () => {
               </div>
             </div>
           ) : (
-            <p className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Search for a location to see forecast data</p>
+            <p className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'} w-full`}>Search for a location to see forecast data</p>
           )}
         </div>
         
-        <div id="saved" className="pt-16">
+        <div id="saved" className="pt-16 w-full">
           <h2 className={`text-3xl font-bold text-center ${darkMode ? 'text-blue-400' : 'text-blue-700'} mb-8`}>Saved Locations</h2>
           
           {savedLocations.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
               {savedLocations.map((location, index) => (
-                <div key={index} className={`${darkMode ? 'bg-black' : 'bg-white'} p-6 rounded-lg ${darkMode ? 'shadow-lg shadow-gray-800/40' : 'shadow-xl shadow-blue-100/50'} relative transition-colors duration-300 transform hover:scale-105`}>
+                <div key={index} className={`${darkMode ? 'bg-black' : 'bg-white'} p-6 rounded-lg ${darkMode ? 'shadow-lg shadow-gray-800/40' : 'shadow-xl shadow-blue-100/50'} relative transition-colors duration-300 transform hover:scale-105 w-full`}>
                   <button 
                     className={`absolute top-3 right-3 ${darkMode ? 'text-gray-500 hover:text-red-400' : 'text-gray-400 hover:text-red-500'} transition-colors duration-300`}
                     onClick={() => removeSavedLocation(index)}
                   >
                     ✕
                   </button>
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between w-full">
                     <div>
                       <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{location.city}</h3>
                       {location.country && (
@@ -420,7 +420,7 @@ const Homepage = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center mt-4">
+                  <div className="flex items-center mt-4 w-full">
                     {location.icon && (
                       <img 
                         src={`https://openweathermap.org/img/w/${location.icon}.png`}
@@ -431,7 +431,7 @@ const Homepage = () => {
                     <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} capitalize`}>{location.description || ''}</p>
                   </div>
                   
-                  <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+                  <div className="mt-4 grid grid-cols-2 gap-4 text-sm w-full">
                     <div className={`${darkMode ? 'bg-gray-700' : 'bg-blue-50'} p-2 rounded-lg ${darkMode ? 'shadow-inner' : 'shadow-sm'}`}>
                       <p className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Sunrise</p>
                       <p className={`font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -449,7 +449,7 @@ const Homepage = () => {
               ))}
             </div>
           ) : (
-            <div className={`text-center ${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} max-w-md mx-auto transition-colors duration-300`}>
+            <div className={`text-center ${darkMode ? 'bg-black' : 'bg-white'} p-8 rounded-xl ${darkMode ? 'shadow-lg shadow-gray-800/50' : 'shadow-xl shadow-blue-100/50'} max-w-md mx-auto transition-colors duration-300 w-full`}>
               <Bookmark size={48} className={`mx-auto ${darkMode ? 'text-gray-600' : 'text-gray-400'} mb-4`} />
               <p className={darkMode ? 'text-gray-300 mb-2' : 'text-gray-600 mb-2'}>No saved locations yet.</p>
               <p className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Search for a city and click "Save" to add it here.</p>
@@ -458,8 +458,8 @@ const Homepage = () => {
         </div>
       </div>
       
-      <div className={`md:hidden fixed bottom-0 left-0 right-0 ${darkMode ? 'bg-black' : 'bg-white'} shadow-lg transition-colors duration-300`}>
-        <div className="flex justify-around items-center py-2">
+      <div className={`md:hidden fixed bottom-0 left-0 right-0 ${darkMode ? 'bg-black' : 'bg-white'} shadow-lg transition-colors duration-300 w-full`}>
+        <div className="flex justify-around items-center py-2 w-full">
           <button onClick={() => scrollToSection('weather')} className="flex flex-col items-center p-2">
             <Home size={24} className={darkMode ? 'text-blue-400 mb-1' : 'text-blue-600 mb-1'} />
             <span className="text-xs">Home</span>
